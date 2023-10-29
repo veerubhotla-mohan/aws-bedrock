@@ -29,7 +29,7 @@ def generate_code_for_prompt(event, context):
         s3 = boto3.client('s3')
         current_time = datetime.now().strftime('%H%M%S')
         s3_key = f'code-output/{current_time}.txt'
-        s3_bucket = 'bedrock-output-bucket'
+        s3_bucket = 'bedrock-output-bucket-test'
         s3.put_object(Bucket = s3_bucket, Key = s3_key, Body = code)
         print("Code generation completed and saved to s3")
 

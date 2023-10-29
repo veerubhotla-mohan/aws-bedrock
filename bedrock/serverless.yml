@@ -11,16 +11,21 @@ functions:
     handler: bedrock_codes/code_generation.generate_code_for_prompt
     timeout: 600
     role: bedrockRole
+    layers:
+      - arn:aws:lambda:us-west-2:************:layer:boto:1
     events:
       - httpApi: 'POST /bedrock/generate_code'
 
 resources:
   Resources:
+    bedrockS3Bucket:
+        Type: AWS::S3::Bucket
+        Properties:
+          BucketName: bedrock-output-bucket-test
     bedrockRole:
       Type: AWS::IAM::Role
       Properties:
-        Path: /my/cust/path/
-        RoleName: bedrock_role
+        RoleName: bedrock_model_role
         AssumeRolePolicyDocument:
           Version: '2012-10-17'
           Statement:
